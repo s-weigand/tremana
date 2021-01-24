@@ -21,4 +21,9 @@ Medical tremor analysis package (e.g. for parkinsonian tremor)
 
 ## Features
 
-- TODO
+- Library with functions for tremor analysis (WIP)
+  - Accelerometry (WIP)
+    - Device raw data reader (WIP)
+    - FFT analysis (WIP)
+- CLI for batch analysis (planned)
+- Jupyter widgets for interactive analysis (planned)
