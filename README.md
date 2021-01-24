@@ -7,7 +7,7 @@
 
 [![Actions Status](https://github.com/s-weigand/tremana/workflows/Tests/badge.svg)](https://github.com/s-weigand/tremana/actions)
 [![Documentation Status](https://readthedocs.org/projects/tremana/badge/?version=latest)](https://tremana.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/gh/s-weigand/tremana/branch/master/graph/badge.svg)](https://codecov.io/gh/s-weigand/tremana)
+[![codecov](https://codecov.io/gh/s-weigand/tremana/branch/main/graph/badge.svg)](https://codecov.io/gh/s-weigand/tremana)
 [![Documentation Coverage](https://raw.githubusercontent.com/s-weigand/tremana/main/docs/_static/interrogate_badge.svg)](https://github.com/s-weigand/tremana)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=s-weigand/tremana)](https://dependabot.com)
 
