@@ -75,3 +75,4 @@ repos:
         args:
           [-v, --config=pyproject.toml, -g, docs/_static/interrogate_badge.svg]
         pass_filenames: false
+        stages: [push]
