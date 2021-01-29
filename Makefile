@@ -6,7 +6,10 @@ import os, webbrowser, sys
 
 from urllib.request import pathname2url
 
-webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
+if sys.platform.startswith("win"):
+	os.startfile("file:" + pathname2url(os.path.abspath(sys.argv[1])))
+else:
+	webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
 
@@ -48,7 +51,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 tremana tests
+	tremana tremana tests
 
 test: ## run tests quickly with the default Python
 	pytest
@@ -63,10 +66,7 @@ coverage: ## check code coverage quickly with the default Python
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/tremana.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ tremana
-	$(MAKE) -C docs clean
+	$(MAKE) -C docs clean_all
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
 
