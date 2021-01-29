@@ -5,6 +5,12 @@ wheel>=0.33.6
 # runtime requirements
 # pinned so the bot can create PRs to test with new versions
 
+Click==7.0
+pandas==1.2.1
+numpy==1.19.5
+PyYAML==5.4.1
+matplotlib==3.3.3
+
 
 # quality asurence
 black>=19.10b0
@@ -23,5 +29,4 @@ pytest>=4.0.0
 pytest-cov>=2.5.1
 tox>=3.5.2
 
-# CLI framework
-Click==7.0
+jupyterlab>=3.0.5

@@ -13,6 +13,10 @@ with open("HISTORY.md") as history_file:
 
 requirements = [
     "Click>=7.0",
+    "pandas>=1.2.0",
+    "numpy>=1.19.5",
+    "PyYAML>=5.4.0",
+    "matplotlib>=3.0",
 ]
 
 setup_requirements = ["pytest-runner"]
