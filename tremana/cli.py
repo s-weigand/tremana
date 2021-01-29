@@ -6,7 +6,17 @@ import click
 
 @click.command()
 def main(args=None):
-    """Console script for tremana."""
+    """Console script for tremana.
+
+    Parameters
+    ----------
+    args : List[str], optional
+        Commandline arguments
+
+    Returns
+    -------
+    int
+    """
     click.echo("Replace this message by putting your code into " "tremana.cli.main")
     click.echo("See click documentation at https://click.palletsprojects.com/")
     return 0
