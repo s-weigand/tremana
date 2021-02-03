@@ -4,11 +4,16 @@ Welcome to tremana's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: User Documentation:
 
    readme
    installation
    usage
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Documentation:
+
    api_docs
    contributing
    history
