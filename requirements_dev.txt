@@ -1,6 +1,5 @@
 # deployment
 pip>=19.2.3
-bump2version>=0.5.11
 wheel>=0.33.6
 # runtime requirements
 # pinned so the bot can create PRs to test with new versions
