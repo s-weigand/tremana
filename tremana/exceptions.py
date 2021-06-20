@@ -1,6 +1,7 @@
 """Custom exceptions for tremana."""
+from __future__ import annotations
+
 import os
-from typing import Union
 
 from tremana import __repo_short_url__
 
@@ -29,7 +30,7 @@ class TremanaParsingException(TremanaException):
         self,
         *args: object,
         msg: str,
-        origin_file: Union[str, os.PathLike] = None,
+        origin_file: str | os.PathLike[str] | None = None,
     ) -> None:  # noqa: D205, D400
         """
         Parameters
@@ -54,7 +55,7 @@ class TremanaParsingSampleRateException(TremanaParsingException):
         self,
         *args: object,
         sample_rate: str,
-        origin_file: Union[str, os.PathLike] = None,
+        origin_file: str | os.PathLike[str] | None = None,
     ) -> None:  # noqa: D205, D400
         """
         Parameters

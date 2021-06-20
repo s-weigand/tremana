@@ -1,25 +1,25 @@
 """Helper function for IO operations."""
+from __future__ import annotations
+
 import os
 from typing import Iterable
-from typing import List
-from typing import Union
 
 
 def lazy_read_headers(
-    file_paths: Iterable[Union[str, os.PathLike]], *, lines_to_read: int = 10
-) -> List[List[str]]:
+    file_paths: Iterable[str | os.PathLike[str]], *, lines_to_read: int = 10
+) -> list[list[str]]:
     """Lazy read headerlines of files.
 
     Parameters
     ----------
-    file_paths : Iterable[Union[str, os.PathLike]]
+    file_paths : Iterable[str | os.PathLike[str]]
         Paths to the files which should be read.
     lines_to_read : int
         Number of lines to be read, by default 10
 
     Returns
     -------
-    List[List[str]]
+    list[list[str]]
         Headerlines of the read files.
     """
     header_lines_list = []
