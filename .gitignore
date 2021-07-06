@@ -104,3 +104,6 @@ ENV/
 
 # IDE settings
 .vscode/
+
+# development artifacts
+dev_notebooks
