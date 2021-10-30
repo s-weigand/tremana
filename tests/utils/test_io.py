@@ -1,7 +1,7 @@
 import pytest
 from py.path import local as TmpDir
 
-from tremana.util.io import lazy_read_headers
+from tremana.utils.io import lazy_read_headers
 
 
 @pytest.mark.parametrize("nr_of_lines", (5, 10, 20))
