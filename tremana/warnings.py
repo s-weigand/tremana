@@ -1,12 +1,11 @@
-"""Custom exceptions for tremana."""
+"""Custom Warnings for tremana."""
+from __future__ import annotations
+
 import os
 from contextlib import contextmanager
 from typing import Any
 from typing import Generator
 from typing import Iterable
-from typing import Optional
-from typing import Type
-from typing import Union
 from warnings import catch_warnings
 from warnings import filterwarnings
 
@@ -20,8 +19,8 @@ class TremanaBaseWarning(UserWarning):
         self,
         *args: object,
         msg: str,
-        origin_file: Union[str, os.PathLike] = None,
-        append_msg: Optional[str] = None,
+        origin_file: str | os.PathLike[str] | None = None,
+        append_msg: str | None = None,
     ) -> None:  # noqa: D205, D400
         """
 
@@ -46,7 +45,7 @@ class TremanaBaseWarning(UserWarning):
 
 @contextmanager
 def filter_tremana_warnings(
-    warning_types: Iterable[Type[TremanaBaseWarning]],
+    warning_types: Iterable[type[TremanaBaseWarning]], message: str = ""
 ) -> Generator[None, None, None]:
     """Contextmanager to filter all warnings defined in ``warning_types``.
 
@@ -54,6 +53,8 @@ def filter_tremana_warnings(
     ----------
     warning_types : Iterable[Type[TremanaBaseWarning]]
         Warnings to be filtered
+    message : str
+        Regular expression to filter warnings by.
 
 
     .. # noqa: DAR301
@@ -61,18 +62,25 @@ def filter_tremana_warnings(
     """
     with catch_warnings():
         for warning in warning_types:
-            filterwarnings("ignore", category=warning)
+            filterwarnings("ignore", category=warning, message=f".+{message}")
         yield
 
 
 class TremanaSupressableWarning(TremanaBaseWarning):
-    """Basewarning for supressable warnings."""
+    """Basewarning for supressable warnings.
+
+    This baseclass can be used to conveniently suppress all none critical warnings.
+
+    See Also
+    --------
+    filter_tremana_warnings
+    """
 
     def __init__(
         self,
         *args: object,
         msg: str,
-        append_msg: Optional[str] = None,
+        append_msg: str | None = None,
         **kwargs: Any,
     ) -> None:  # noqa: D205, D400
         """
@@ -120,15 +128,47 @@ class TremanaParsingIgnoredSignalTypeWarning(TremanaNotSupportedWarning):
         signal_type : str
             Value of the signal type.
 
-        See Also
-        --------
-        tremana.parsers.devices.somnowatch._somnowatch_parse_header
-
 
         .. # noqa: DAR101
         """
         msg = f"Signals of type {signal_type!r} aren't used by tremana yet and will be ignored."
         super().__init__(*args, msg=msg, **kwargs)
+
+
+class TremanaParsingInconsistentMetadataWarning(TremanaSupressableWarning):
+    """Warning for inconsistent metadata in a measurement."""
+
+    def __init__(
+        self,
+        *args: object,
+        actual_value: Any,
+        expected_value: Any,
+        metadata_name: str,
+        origin_file: str | os.PathLike[str],
+        **kwargs: Any,
+    ) -> None:  # noqa: D205, D400
+        """
+
+        Parameters
+        ----------
+        actual_value : Any
+            Value of the metadata
+        expected_value : Any
+            Expected value of the metadata
+        metadata_name : str
+            Name of the metadata
+        origin_file : Union[str, os.PathLike]
+            Path to the file causing the warning
+
+
+        .. # noqa: DAR101
+        """
+        msg = (
+            f"The value of the {metadata_name!r} was of value {actual_value!r} "
+            f"while other files have the value {expected_value!r}.\n"
+            "This could mean that the parts of the measurements don't belong together."
+        )
+        super().__init__(*args, msg=msg, origin_file=origin_file, **kwargs)
 
 
 class TremanaParsingIncorrectDateFormatWarning(TremanaSupressableWarning):
@@ -144,15 +184,13 @@ class TremanaParsingIncorrectDateFormatWarning(TremanaSupressableWarning):
         date_str : str
             Value of the string which should be parsed
         format_str : str
-            [description]
-
-        See Also
-        --------
-        tremana.parsers.devices.somnowatch._somnowatch_parse_header
+            Format string used to parse ``date_str``.
 
 
         .. # noqa: DAR101
         """
-        msg = f"The date {date_str!r} can't be parsed with the provied \
-            datetime_format {format_str!r}."
+        msg = (
+            f"The date {date_str!r} can't be parsed with the provided "
+            f"datetime_format {format_str!r}."
+        )
         super().__init__(*args, msg=msg, **kwargs)

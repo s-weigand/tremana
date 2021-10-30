@@ -1,11 +1,13 @@
 """Console script for tremana."""
+from __future__ import annotations
+
 import sys
 
 import click
 
 
 @click.command()
-def main(args=None):
+def main(args: list[str] | None = None) -> int:
     """Console script for tremana.
 
     Parameters
