@@ -85,7 +85,7 @@ def test_power_density_spectra(
             result.index.get_loc(frequency, method="nearest")
         ]
 
-        assert np.allclose(pds_amplitude_at_frequency, amplitude ** 2, rtol=1e-3)
+        assert np.allclose(pds_amplitude_at_frequency, amplitude**2, rtol=1e-3)
 
 
 def test_power_density_spectra_normalized():
